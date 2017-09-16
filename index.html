@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta id="viewport" name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1; user-scalable=no;">
+    <title>Document</title>
+    <link rel="stylesheet" href="./src/css/normalize.css">
+    <link rel="stylesheet" href="./node_modules/muiv3/dist/css/mui.min.css">
+    <link rel="stylesheet" href="./node_modules/muiv3/plugin/picker/dist/css/mui.picker.min.css">
+    <link rel="stylesheet" href="./src/css/index.css">
+    <link rel="stylesheet" href="./src/css/sendEmail.css">
+</head>
+
+<body>
+    <div class="content main-content"></div>
+
+    <!--actionsheet-->
+    <div id="action-sheet-wrapper" class="mui-popover mui-popover-action mui-popover-bottom">
+        <ul class="mui-table-view">
+            <li class="mui-table-view-cell">
+                <a href="#">用户信息</a>
+            </li>
+            <li class="mui-table-view-cell">
+                <a href="#">退出系统</a>
+            </li>
+            <li class="mui-table-view-cell">
+                <a href="#action-sheet-wrapper">关闭菜单</a>
+            </li>
+        </ul>
+    </div>
+    <!--底部tabbar布局-->
+    <div class="tabbar">
+        <div class="home active">
+            <p class="mui-icon mui-icon-home"></p>
+            <p>主页</p>
+        </div>
+        <div class="message">
+            <p class="mui-icon mui-icon-chatboxes"></p>
+            <p>消息</p>
+        </div>
+        <div class="application">
+            <p class="mui-icon mui-icon-flag"></p>
+            <p>应用</p>
+        </div>
+    </div>
+</body>
+<script src='./node_modules/requirejs/require.js' data-main='main'></script>
+
+</html>

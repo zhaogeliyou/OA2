@@ -1,0 +1,42 @@
+<div id="distributeInfo">
+    <header class="top">
+        <span class="close mui-icon mui-icon-closeempty mui-pull-left"></span>
+        <h3>发布信息</h3>
+        <span class="addBudget mui-pull-right mui-icon mui-icon-checkmarkempty">&nbsp;保存</span>
+    </header>
+
+    <div class="emailContent distribute-content">
+        <form id="upload" method="post" enctype="multipart/form-data" action="/src//js/home/email/upload.php">
+            <div class="mui-input-row classifyBtn">
+                <label>类别</label>
+                <input type="button" class="mui-input-clear" value="" readonly>
+            </div>
+
+            <div class="theme email-input">
+                <label>主题</label>
+                <input type="text" name="" value="" class='info-item-title'>
+                <b class="mui-icon mui-icon-paperclip mui-pull-right uploadBtn"></b>
+                <input type="file" multiple="multiple" style="display:none">
+            </div>
+            <ul class="clearfix">
+
+            </ul>
+            <div class="article-content">
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="infoClassify pop-up">
+    <h3>类别</h3>
+    <div class="radio-group">
+        <div class="mui-input-row mui-radio mui-left">
+            <label code='0001' class="current">新闻动态</label>
+            <input name="radio1" type="radio" checked>
+        </div>
+    </div>
+    <div class="promit">
+        <span class="cancle">取消</span>
+        <span class="confirm">确定</span>
+    </div>
+</div>
