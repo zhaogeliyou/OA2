@@ -48,8 +48,8 @@ define(['text!template/home/dayCoop/addDayOrderTpl.html'], function(addDayOrderT
                     '<div class="start-time">' +
                     ' <span>2017-09-09</span>' +
                     '</div>' +
-                    '<div class="delete">' +
-                    '<span>删除</span>' +
+                    '<div>' +
+                    '<span class="delete">删除</span>' +
                     ' </div>' +
                     ' </div>')
             })

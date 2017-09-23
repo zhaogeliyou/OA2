@@ -1,4 +1,4 @@
-define(['text!template/home/dayCoop/cahierTpl.html', './cahierContent'], function(cahierTpl, cahierContent) {
+define(['text!template/home/dayCoop/cahierTpl.html', './cahierContent', './addCahier'], function(cahierTpl, cahierContent, addCahier) {
     return function() {
         $('#cahier').remove();
         var $cahierTpl = $(cahierTpl);
@@ -20,9 +20,23 @@ define(['text!template/home/dayCoop/cahierTpl.html', './cahierContent'], functio
             cahierContent(post)
         })
 
-        // 注册发布按钮事件
-        .on('tap', '.publish', function() {
-            publishPost()
+        // 注册增加按钮事件
+        .on('tap', '.add', function() {
+            addCahier()
+        })
+
+        // 注册删除按钮事件
+        .on('tap', '.delete', function() {
+            var $this = $(this)
+            var btnArray = ['是', '否'];
+            mui.confirm('确定删除该计划吗？', '删除后不能恢复', btnArray, function(e) {
+                if (e.index == 0) {
+                    alert('确认删除操作')
+                    $this.parent().remove()
+                } else {
+                    alert('放弃删除')
+                }
+            })
         })
 
     }

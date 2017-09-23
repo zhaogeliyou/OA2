@@ -1,5 +1,6 @@
-define(['text!template/home/infoCenter/distributeInfo/distributeInfoTpl.html', 'wangEditor', 'mui', 'widget', 'iframeTransport', 'fileUpload', 'artEditor'], function(distributeInfoTpl, E, mui) {
+define(['require', 'text!template/home/infoCenter/distributeInfo/distributeInfoTpl.html', 'mui', 'widget', 'iframeTransport', 'fileUpload', 'eleditor', 'webuploader'], function(require, distributeInfoTpl, mui) {
     return function() {
+        window.WebUploader = require('webuploader')
         var $distributeInfoTpl = $(distributeInfoTpl);
         $('.main-content').append($distributeInfoTpl);
 
@@ -42,17 +43,15 @@ define(['text!template/home/infoCenter/distributeInfo/distributeInfoTpl.html', '
 
 
         // 初始化编辑器
-        var editor = $('.article-content');
-        editor.each(function(i, v) {
-            var editor = new E(v)
-            editor.customConfig.menus = [
-                'head',
-                'bold',
-                'italic',
-                'link'
-            ];
-            editor.create();
-        })
+        var Edr = new Eleditor({
+            el: '#article-content', //容器
+            //placeHolder: '请输入内容',
+            upload: { //上传配置
+                server: './../../../dev/src/assets/eleditor/upload.json', //上传路径
+                compress: true, //上传前是否压缩图片
+                fileSizeLimit: 20 //限制图片上传大小，单位M
+            },
+        });
 
         // 文件提交
         $(function() {
@@ -61,17 +60,13 @@ define(['text!template/home/infoCenter/distributeInfo/distributeInfoTpl.html', '
 
             // Initialize the jQuery File Upload plugin
             $('#upload').fileupload({
-                uploadUrl: 'upload-file.php',
-
-                // This element will accept file drag/drop uploading
-                // dropZone: $('#drop'),
-
-                // This function is called when a file is added to the queue;
-                // either via the browse button, or via drag/drop:
+                dataType: 'json',
+                url: 'http://127.0.0.1:8080/dev/upload.php',
                 add: function(e, data) {
 
                     // 点击发送按钮提交
                     $(".send").on('tap', function() {
+                        alert(3)
                         data.submit()
                     })
 
@@ -99,23 +94,9 @@ define(['text!template/home/infoCenter/distributeInfo/distributeInfoTpl.html', '
                         });
 
                     });
-
-                    // Automatically upload the file once it is added to the queue
-                    var jqXHR = data.submit();
                 },
-
-                progress: function(e, data) {
-
-                    // Calculate the completion percentage of the upload
-                    var progress = parseInt(data.loaded / data.total * 100, 10);
-
-                    // Update the hidden input field and trigger a change
-                    // so that the jQuery knob plugin knows to update the dial
-                    data.context.find('input').val(progress).change();
-
-                    if (progress == 100) {
-                        data.context.removeClass('working');
-                    }
+                done: function(e, data) {
+                    alert(9)
                 },
 
                 fail: function(e, data) {

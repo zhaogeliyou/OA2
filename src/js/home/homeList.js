@@ -1,9 +1,9 @@
-define(['text!template/home/homeListTpl.html', './infoCenter/browseInfo/browseInfo', './infoCenter/distributeInfo/distributeInfo', './infoCenter/GMInfo/GMInfo', './email/sendEmail', './email/getMail/getMail', './email/drafts/drafts',
+define(['text!template/home/homeListTpl.html', '../comment/getUpdateSituation/getUpdateSituation', './infoCenter/browseInfo/browseInfo', './infoCenter/distributeInfo/distributeInfo', './infoCenter/GMInfo/GMInfo', './infoCenter/bylaw/bylaw', './email/sendEmail', './email/getMail/getMail', './email/drafts/drafts',
     './email/sentMail/sentMail', './personDoc/GMDoc', './personDoc/browseDoc', './dptDoc/browseDocDpt', './dptDoc/GMDocDpt', './knowledgeGM/browseDocKnowledge', './knowledgeGM/addDocKonwledge', './knowledgeGM/GMDocKonwledge', './workSheet/builtSheet', './workSheet/todoSheet',
     './workSheet/runSheet', './dayCoop/dayOrder', './dayCoop/cahier',
-    './personGM/employeeForum',
+    './personGM/employeeForum', './personGM/recruitList',
     './transaction/newTransaction', './transaction/establishedTransaction', './transaction/todoTransaction', './transaction/finishedTransaction', './notepad/notepad', './budget/budget', './addressBook/addressBookList', './taskReminder/taskReminder', './postCode/postCode', './friendSetting/friendSetting', './shortcut/shortcut', 'mui'
-], function(homeListTpl, browseInfo, distributeInfo, GMInfo, sendEmail, getMail, drafts, sentMail, GMDoc, browseDoc, browseDocDpt, GMDocDpt, browseDocKnowledge, addDocKonwledge, GMDocKonwledge, builtSheet, todoSheet, runSheet, dayOrder, cahier, employeeForum, newTransaction, establishedTransaction, todoTransaction, finishedTransaction, notepad, budget, addressBookList, taskReminder, postCode, friendSetting, shortcut, mui) {
+], function(homeListTpl, getUpdateSituation, browseInfo, distributeInfo, GMInfo, bylaw, sendEmail, getMail, drafts, sentMail, GMDoc, browseDoc, browseDocDpt, GMDocDpt, browseDocKnowledge, addDocKonwledge, GMDocKonwledge, builtSheet, todoSheet, runSheet, dayOrder, cahier, employeeForum, recruitList, newTransaction, establishedTransaction, todoTransaction, finishedTransaction, notepad, budget, addressBookList, taskReminder, postCode, friendSetting, shortcut, mui) {
     return function() {
         $(".content").html(homeListTpl)
             // 左侧侧滑菜单
@@ -23,6 +23,12 @@ define(['text!template/home/homeListTpl.html', './infoCenter/browseInfo/browseIn
         .on('tap', '.GMInfo', function() {
             offCanvasWrapper.offCanvas('close');
             GMInfo()
+        })
+
+        // 规章制度
+        .on('tap', '.bylaw', function() {
+            offCanvasWrapper.offCanvas('close');
+            bylaw()
         })
 
         // 发送邮件
@@ -127,6 +133,12 @@ define(['text!template/home/homeListTpl.html', './infoCenter/browseInfo/browseIn
             employeeForum()
         })
 
+        // 内部招聘信息
+        .on('tap', '.recruit', function() {
+            offCanvasWrapper.offCanvas('close');
+            recruitList()
+        })
+
         // 新建事务
         .on('tap', '.newTransaction', function() {
             offCanvasWrapper.offCanvas('close');
@@ -198,6 +210,12 @@ define(['text!template/home/homeListTpl.html', './infoCenter/browseInfo/browseIn
         .on('tap', '.shortcut', function() {
             offCanvasWrapper.offCanvas('close');
             shortcut();
+        })
+
+        // 列表刷新按钮
+        .on('tap', '.mui-icon-loop', function() {
+            var $this = $(this).parent().siblings('.update-situation');
+            getUpdateSituation($this)
         })
         mui.init({
             swipeback: true

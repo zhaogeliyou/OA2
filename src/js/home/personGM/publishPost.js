@@ -1,5 +1,6 @@
-define(['text!template/home/personGM/publishPostTpl.html', 'artEditor'], function(publishPostTpl, artEditor) {
+define(['require', 'text!template/home/personGM/publishPostTpl.html', 'eleditor', 'webuploader'], function(require, publishPostTpl, artEditor) {
     return function() {
+        window.WebUploader = require('webuploader')
         $('#publishPost').remove();
         var $publishPostTpl = $(publishPostTpl);
         $('.main-content').append($publishPostTpl)
@@ -17,50 +18,31 @@ define(['text!template/home/personGM/publishPostTpl.html', 'artEditor'], functio
         // 注册保存按钮事件
         .on('tap', '.answer', function() {
             var theme = $('.post-theme input').val()
-            console.log($('#content').getValue())
-            $publishPostTpl.stop().animate({ 'top': '100%' }, 200, function() {
-                $('.forum-list').append('<div class="list-row">' +
-                    '<div class="theme">' + theme + '</div>' +
-                    '<div class="author">李萌</div>' +
-                    '<div class="click">18</div>' +
-                    '<div class="answer">43</div>' +
-                    '<div class="last-answer">2017/09/09</div>' +
-                    '</div>')
-                $publishPostTpl.remove()
-            })
-        })
-
-        // 注册图片上传按钮事件
-        .on('tap', '.picBtn', function() {
-            $('#imageUpload').click()
-        })
-
-
-        $('#content').artEditor({
-            imgTar: '#imageUpload',
-            limitSize: 5, // 兆
-            showServer: false,
-            uploadUrl: '',
-            data: {},
-            uploadField: 'image',
-            placeholader: '<p>请输入文章正文内容</p>',
-            validHtml: ["br"],
-            uploadSuccess: function(res) {
-                // 这里是处理返回数据业务逻辑的地方
-                // `res`为服务器返回`status==200`的`response`
-                // 如果这里`return <path>`将会以`<img src='path'>`的形式插入到页面
-                // 如果发现`res`不符合业务逻辑
-                // 比如后台告诉你这张图片不对劲
-                // 麻烦返回 `false`
-                // 当然如果`showServer==false`
-                // 无所谓咯
-                return res.path;
-            },
-            uploadError: function(res) {
-                //这里做上传失败的操作
-                //也就是http返回码非200的时候
-                console.log(res);
+            var content = Edr.getContent();
+            if (theme.trim() && (content.trim() && $(content).text() != '点击此处编辑内容' || $('#content').find('img').length)) {
+                $publishPostTpl.stop().animate({ 'top': '100%' }, 200, function() {
+                    $('.forum-list').append('<div class="list-row">' +
+                        '<div class="theme">' + theme + '</div>' +
+                        '<div class="author">李萌</div>' +
+                        '<div class="click">18</div>' +
+                        '<div class="answer">43</div>' +
+                        '<div class="last-answer">2017/09/09</div>' +
+                        '</div>')
+                    $publishPostTpl.remove()
+                })
             }
+        })
+
+
+        // 初始化编辑器
+        var Edr = new Eleditor({
+            el: '#content', //容器
+            //placeHolder: '请输入内容',
+            upload: { //上传配置
+                server: '../../../dev/src/assets/eleditor/upload.json', //上传路径
+                compress: true, //上传前是否压缩图片
+                fileSizeLimit: 20 //限制图片上传大小，单位M
+            },
         });
     }
 })

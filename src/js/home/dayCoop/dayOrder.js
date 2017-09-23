@@ -31,7 +31,7 @@ define(['text!template/home/dayCoop/dayOrderTpl.html', './dayOrderContent', './a
             mui.confirm('确定删除该计划吗？', '删除后不能恢复', btnArray, function(e) {
                 if (e.index == 0) {
                     alert('确认删除操作')
-                    $this.parent().remove()
+                    $this.parent().parent().remove()
                 } else {
                     alert('放弃删除')
                 }

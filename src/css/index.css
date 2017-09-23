@@ -74,25 +74,68 @@
       background-color: #fff;
   }
   
-  .mui-table-view {
-      background-color: rgb(244, 244, 244);
+  .mui-table-view-cell {
+      line-height: 40px;
+      padding: 0;
   }
   
   .mui-table-view-cell:after {
       left: 0;
+      background-color: #fff;
   }
   
   .mui-table-view-cell b {
       margin-right: 5px;
+      margin-left: 16px;
   }
   
   .mui-table-view-cell p {
       color: rgb(79, 223, 112);
+      margin-right: 15px;
   }
   
   .mui-table-view-cell p span {
       margin-left: 3px;
       font-size: 18px;
+  }
+  
+  .mui-icon-arrowright {
+      line-height: 35px;
+      margin-right: 15px;
+  }
+  
+  .mui-icon-arrowright:before {
+      color: #c8c7cc;
+  }
+  
+  #offCanvasContentScroll ul {
+      background: #F9F9F9;
+  }
+  
+  #offCanvasContentScroll ul .update-situation {
+      background: #fff;
+      padding-left: 26px;
+  }
+  
+  #offCanvasContentScroll ul .update-situation .list-row {
+      height: 35px;
+      line-height: 35px;
+      font-size: 14px;
+      position: relative;
+  }
+  
+  #offCanvasContentScroll ul .update-situation .list-row:after {
+      content: '';
+      height: 1px;
+      width: 100%;
+      background: #DBDBDE;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+  }
+  
+  #offCanvasContentScroll ul .update-situation .list-row .time {
+      margin-right: 15px;
   }
   /*首页左侧菜单*/
   

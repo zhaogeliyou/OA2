@@ -10,7 +10,9 @@ require.config({
         fileUpload: './src/assets/fileUpload-master/src/main/webapp/js/jquery.fileupload',
         artEditor: './src/assets/artEditor-master/dist/index.min',
         wangEditor: './src/assets/wangEditor-3.0.8/release/wangEditor.min',
-        picker: './node_modules/muiv3/plugin/picker/dist/js/mui.picker.min'
+        picker: './node_modules/muiv3/plugin/picker/dist/js/mui.picker.min',
+        eleditor: './src/assets/eleditor/Eleditor',
+        webuploader: './src/assets/eleditor/webuploader.min'
     },
     shim: {
         "mui": {
@@ -36,6 +38,14 @@ require.config({
         "picker": {
             deps: ['mui'],
             exports: "picker"
+        },
+        "eleditor": {
+            deps: ['jquery'],
+            exports: "eleditor"
+        },
+        "webuploader": {
+            deps: ['jquery'],
+            exports: "webuploader"
         }
     }
 })
